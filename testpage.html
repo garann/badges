@@ -34,9 +34,9 @@
 	var x = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
 	var y = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
 	// getting your signed URLs:
-	// 1. pop this in your browser: http://api.meetup.com/groups.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
+	// 1. pop this in your browser or wherever: http://api.meetup.com/groups.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
 	// 2. paste the signed URL into groupbadge.groupUrl
-	// 3. now this in your browser: http://api.meetup.com/events.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
+	// 3. now open this one: http://api.meetup.com/events.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
 	// 4. paste the signed URL into groupbadge.eventUrl
 	var groupUrl = "https://api.meetup.com/groups.json/?radius=25.0&order=ctime&group_urlname=Austin-All-Girl-Hack-Night&offset=0&format=json&page=200&sig_id=11631162&sig=739a9e37050cb4929a3e274bd91beabfdb21aece";
 	var eventUrl = "http://api.meetup.com/events.json/?radius=25.0&order=time&group_urlname=Austin-All-Girl-Hack-Night&offset=0&format=json&page=200&fields=&sig_id=11631162&sig=fab7c084384fec44e9f4f2811f835f439ded8d2f";
