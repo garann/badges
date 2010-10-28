@@ -1,0 +1,7 @@
+.meetup-badge { width: 200px; text-align: center; background-color: #f00; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; color: #fff; padding: 1px; font-size: 12px; font-weight: bold; line-height: 30px; font-family: Arial, Arial, Helvetica, sans-serif; }
+.meetup-name { background-color: #fff; padding: 5px 0px; }
+#meetup-name-text { color: #000; font-size: 26px; line-height: 22px; font-family: "Comic Sans MS", cursive; text-shadow: 0px 0px 1px hsl(0,0%,0%), -2px 2px 1px hsl(0,0%,0%); -moz-transform: skew(10deg) rotate(-2deg); -webkit-transform: skew(10deg) rotate(-2deg); }
+.next-meetup { display: block; font-size: 10px; line-height: 24px; }
+.next-meetup span { background-color: #000; border: 1px solid #fff; padding: 1px 4px; }
+.meetup-badge-fetch { height: 1px; width: 1px; border: none; position: absolute; }
+

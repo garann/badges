@@ -3,17 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Untitled Document</title>
-<style media="all">
-
-.meetup-badge { width: 200px; text-align: center; background-color: #f00; -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; color: #fff; padding: 1px; font-size: 12px; font-weight: bold; line-height: 30px; font-family: Arial, Arial, Helvetica, sans-serif; }
-.meetup-name { background-color: #fff; padding: 5px 0px; }
-#meetup-name-text { color: #000; font-size: 26px; line-height: 22px; font-family: "Comic Sans MS", cursive; text-shadow: 0px 0px 1px hsl(0,0%,0%), -2px 2px 1px hsl(0,0%,0%); -moz-transform: skew(10deg) rotate(-2deg); -webkit-transform: skew(10deg) rotate(-2deg); }
-.next-meetup { display: block; font-size: 10px; line-height: 24px; }
-.next-meetup span { background-color: #000; border: 1px solid #fff; padding: 1px 4px; }
-.meetup-badge-fetch { height: 1px; width: 1px; border: none; position: absolute; }
-
-</style>
-
+<link rel="stylesheet" href="badges.css" />
 
 </head>
 
@@ -30,22 +20,7 @@
 	</span>
 </div>
 
-<script>
-	// setup:
-	// 1. get your signed URL by..
-	//		- getting your API key here: http://www.meetup.com/meetup_api/key/
-	//		- pasting this into your browser: http://api.meetup.com/events.json/?group_urlname=[YOUR_GROUP_NAME]&key=[YOUR_API_KEY]&sign=true&callback=[YOUR_FUNCTION_NAME]
-	// 2. find the signed_url property in the results and paste it in down below
-	// 3. change this function name to the name you specified:
-	function loadMeetupBadge (resp) {
-		if (resp) {
-			var dt = Date.parse(resp.results[0].time);
-			var daysLeft = Math.ceil(dt-new Date().getTime());
-			document.getElementById("next-meetup-days").innerHTML = parseInt(daysLeft/(1000*60*60*24));
-			document.getElementById("next-meetup-hours").innerHTML = Math.round((daysLeft/(1000*60*60)) % 24);
-		}	
-	}
-</script>
+<script src="badges.js"></script>
 <!-- paste your signed url in the src of the next line! -->
 <script src="http://api.meetup.com/events.json/?radius=25.0&order=time&group_urlname=Austin-All-Girl-Hack-Night&offset=0&callback=loadMeetupBadge&format=json&page=200&fields=&sig_id=11631162&sig=fab7c084384fec44e9f4f2811f835f439ded8d2f"></script>
 </body>
