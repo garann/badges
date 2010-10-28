@@ -10,6 +10,7 @@
 #meetup-name-text { color: #000; font-size: 26px; line-height: 22px; font-family: "Comic Sans MS", cursive; text-shadow: 0px 0px 1px hsl(0,0%,0%), -2px 2px 1px hsl(0,0%,0%); -moz-transform: skew(10deg) rotate(-2deg); -webkit-transform: skew(10deg) rotate(-2deg); }
 .next-meetup { display: block; font-size: 10px; line-height: 24px; }
 .next-meetup span { background-color: #000; border: 1px solid #fff; padding: 1px 4px; }
+.meetup-badge-fetch { height: 1px; width: 1px; border: none; position: absolute; }
 
 </style>
 
@@ -21,7 +22,7 @@
 <div class="meetup-badge">
 	Proud member of
 	<div class="meetup-name">
-		<span id="meetup-name-text">??</span>
+		<span id="meetup-name-text">Austin All-Girl Hack Night</span>
 	</div>
 	<span class="next-meetup">Next meetup in:
 		<span id="next-meetup-days">?</span> days
@@ -30,45 +31,22 @@
 </div>
 
 <script>
-(function() {
-	var x = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-	var y = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-	// getting your signed URLs:
-	// 1. pop this in your browser or wherever: http://api.meetup.com/groups.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
-	// 2. paste the signed URL into groupbadge.groupUrl
-	// 3. now open this one: http://api.meetup.com/events.json/?group_urlname=[YOUR GROUP NAME]&key=[YOUR API KEY]&sign=true
-	// 4. paste the signed URL into groupbadge.eventUrl
-	var groupUrl = "https://api.meetup.com/groups.json/?radius=25.0&order=ctime&group_urlname=Austin-All-Girl-Hack-Night&offset=0&format=json&page=200&sig_id=11631162&sig=739a9e37050cb4929a3e274bd91beabfdb21aece";
-	var eventUrl = "http://api.meetup.com/events.json/?radius=25.0&order=time&group_urlname=Austin-All-Girl-Hack-Night&offset=0&format=json&page=200&fields=&sig_id=11631162&sig=fab7c084384fec44e9f4f2811f835f439ded8d2f";
-	
-	x.onreadystatechange = function() {
-		if (x.readyState == 4) {
-			if (x.responseText.length) {
-				var resp = JSON.parse(x.responseText);
-				var dt = Date.parse(resp.results[0].time);
-				var daysLeft = Math.ceil(dt-new Date().getTime());
-				document.getElementById("next-meetup-days").innerHTML = parseInt(daysLeft/(1000*60*60*24));
-				document.getElementById("next-meetup-hours").innerHTML = Math.round((daysLeft/(1000*60*60)) % 24);
-			} else {
-				alert("no data received. :(");	
-			}
-		}
+	// setup:
+	// 1. get your signed URL by..
+	//		- getting your API key here: http://www.meetup.com/meetup_api/key/
+	//		- pasting this into your browser: http://api.meetup.com/events.json/?group_urlname=[YOUR_GROUP_NAME]&key=[YOUR_API_KEY]&sign=true&callback=[YOUR_FUNCTION_NAME]
+	// 2. find the signed_url property in the results and paste it in down below
+	// 3. change this function name to the name you specified:
+	function loadMeetupBadge (resp) {
+		if (resp) {
+			var dt = Date.parse(resp.results[0].time);
+			var daysLeft = Math.ceil(dt-new Date().getTime());
+			document.getElementById("next-meetup-days").innerHTML = parseInt(daysLeft/(1000*60*60*24));
+			document.getElementById("next-meetup-hours").innerHTML = Math.round((daysLeft/(1000*60*60)) % 24);
+		}	
 	}
-	y.onreadystatechange = function() {
-		if (y.readyState == 4) {
-			if (y.responseText.length) {
-				var resp = JSON.parse(y.responseText);
-				document.getElementById("meetup-name-text").innerHTML = resp.results[0].name;
-			} else {
-				alert("no data received. :(");	
-			}
-		}
-	}
-	x.open('GET', eventUrl, true);
-	x.send(null);
-	y.open('GET', groupUrl, true);
-	y.send(null);
-})();
 </script>
+<!-- paste your signed url in the src of the next line! -->
+<script src="http://api.meetup.com/events.json/?radius=25.0&order=time&group_urlname=Austin-All-Girl-Hack-Night&offset=0&callback=loadMeetupBadge&format=json&page=200&fields=&sig_id=11631162&sig=fab7c084384fec44e9f4f2811f835f439ded8d2f"></script>
 </body>
 </html>
